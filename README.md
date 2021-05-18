@@ -13,6 +13,6 @@ Flags: All the install command flags are supported.
 ## Install
 
 ```sh
-$ helm plugin install https://github.com/maikuroashi/helm-installx.git
-Installed plugin: env
+$ helm plugin install https://github.com/maikuroashi/helm-installx
+Installed plugin: installx
 ```
