@@ -1,0 +1,8 @@
+---
+name: "installx"
+version: "0.1.0"
+usage: "install a chart and allow merging of values files"
+description: "install a chart and allow merging of values files"
+command: "$HELM_PLUGIN_DIR/installx.sh"
+hooks:
+  install: "$HELM_PLUGIN_DIR/installx.sh --help"
