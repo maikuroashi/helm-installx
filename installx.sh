@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
 
 VALUE_FILES=()
-PARAMS=""
-
-function appendParams() {
-    if [ -z "$PARAMS" ]; then
-      PARAMS="$1"
-    else
-      PARAMS="$PARAMS $1"
-    fi
-}
+PARAMS=()
 
 while (( "$#" )); do
   case "$1" in
@@ -23,7 +15,7 @@ while (( "$#" )); do
       fi
       ;;
     *)
-      appendParams "$1"
+      PARAMS+=("$1")
       shift
       ;;
   esac
@@ -40,10 +32,8 @@ if [[ ! $YQ_VERSION =~ ^.+3.+$ ]]; then
   exit 1
 fi
 
-set -- "${PARAMS[@]}"
-
 if [ ${#VALUE_FILES[@]} -gt 0 ]; then
-  yq m -x "${VALUE_FILES[*]}" | helm install "$@" --values -
+  yq m -x "${VALUE_FILES[@]}" | "$HELM_BIN" install "${PARAMS[@]}" --values -
 else 
-  helm install "$@"
+  "$HELM_BIN" install "${PARAMS[@]}"
 fi
